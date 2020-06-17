@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="P4_Projekt_2.UserControls.LokatyUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:P4_Projekt_2.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="ButtonZalozNowaLokate" TargetType="Button" BasedOn="{StaticResource ButtontheBankStyle}">
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=KwotaLokaty}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="nowaLokata" FontSize="29" Foreground="Orange" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            <ComboBox x:Name="PercentComboBox" FontWeight="Bold" Width="150" Grid.Column="0" Grid.Row="1" SelectedIndex="0">
+                <ComboBoxItem Content="0,8%" />
+                <ComboBoxItem Content="1%" />
+                <ComboBoxItem Content="1,5%" />
+            </ComboBox>
+
+            <ComboBox x:Name="DateComboBox" FontWeight="Bold" Width="150" Grid.Column="0" Grid.Row="2" SelectedIndex="0">
+                <ComboBoxItem Content="1 miesiąc" />
+                <ComboBoxItem Content="2 miesiące" />
+                <ComboBoxItem Content="3 miesiące" />
+                <ComboBoxItem Content="6 miesięcy" />
+                <ComboBoxItem Content="12 miesięcy" />
+                <ComboBoxItem Content="24 miesięcy" />
+            </ComboBox>
+
+            <TextBox Foreground="Black" Text="{Binding newDeposit.Cash, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" x:Name="KwotaLokaty" HorizontalAlignment="Center" TextAlignment="Left"  VerticalAlignment="Center"  Width="150" Grid.Row="3" FontSize="15" FontWeight="Bold" MaxLength="10"/>
+            <Button x:Name="btnZalozLokate" Margin="0 10 0 0" Style="{StaticResource ButtonZalozNowaLokate}" Content="Załóż lokate" Grid.Row="4" />
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Background="Moccasin" Grid.ColumnSpan="4" Grid.Column="0" Height="50"/>
+
+                <TextBlock Text="Oprocentowanie"  Grid.Column="0" Style="{StaticResource TextBlocktheBankStyle}" FontSize="17" VerticalAlignment="Center"/>
+                <TextBlock Text="Kwota"  Grid.Column="1" Style="{StaticResource TextBlocktheBankStyle}" FontSize="20" VerticalAlignment="Center"/>
+                <TextBlock Text="Data rozpoczęcia"  Grid.Column="2" Style="{StaticResource TextBlocktheBankStyle}" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Text="Data zakończenia"  Grid.Column="3" Style="{StaticResource TextBlocktheBankStyle}" FontSize="16" VerticalAlignment="Center"/>
+
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Deposits}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <local:SingleOperationUserControl DataContext="{Binding .}" Height="60" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

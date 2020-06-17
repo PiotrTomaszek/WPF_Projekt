@@ -1,0 +1,46 @@
+﻿{
+"login": "Piotr",
+"alias" : "054493",
+"clientmoney": 199.99 ,
+"deposits": 
+[
+	{
+		"cash": 5000.00,
+		"whatpercent": 0.7,
+		"starttime": "2020-01-01",
+		"endtime": "2020-12-30"
+	},
+	{
+		"cash": 10000.00,
+		"whatpercent": 1.2,
+		"starttime": "2015-01-01",
+		"endtime": "2025-12-30"
+	}
+],
+"credits":
+[
+	{
+		"cash": 1500.00,
+		"whatpercent": 18.10,
+		"starttime": "2020-05-17",
+		"endtime": "2021-01-01"
+	}
+],
+"transfers":
+[
+	{
+		"nameoftransfer": "Robert Makłowicz",
+		"addressoftransfer": "ul.Dobra 1, Bielsko-Biała 43-300",
+		"accountnumberoftransfer": "556661239333",
+		"pricetransfer": 320.50,
+		"dateoftransfer": "2020-02-12"
+	},
+	{
+		"nameoftransfer": "Mariusz Pudzianowski",
+		"addressoftransfer": "ul.Super 14, Katowice 43-000",
+		"accountnumberoftransfer": "549999239333",
+		"pricetransfer": 9999.99,
+		"dateoftransfer": "2020-05-25"
+	}
+]
+}

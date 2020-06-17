@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="P4_Projekt_2.UserControls.KredytyUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:P4_Projekt_2.UserControls"
+             xmlns:converters="clr-namespace:P4_Projekt_2.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="nowyKredyt" FontSize="29" Foreground="Orange" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+            <TextBlock Width="150" Grid.Row="1" TextAlignment="Left" VerticalAlignment="Center" Style="{StaticResource TextBlocktheBankStyle}" Text="RRSO: 18,89%" />
+
+            <ComboBox x:Name="DateComboBox" FontWeight="Bold" HorizontalAlignment="Center" Width="150" Grid.Column="0" Grid.Row="2" SelectedIndex="0">
+                <ComboBoxItem Content="12 miesięcy" />
+                <ComboBoxItem Content="24 miesięcy" />
+                <ComboBoxItem Content="48 miesięcy" />
+                <ComboBoxItem Content="96 miesięcy" />
+            </ComboBox>
+
+            <ComboBox x:Name="PriceComboBox" FontWeight="Bold" HorizontalAlignment="Center" Width="150" Grid.Column="0" Grid.Row="3" SelectedIndex="0">
+                <ComboBoxItem Content="1000zł" />
+                <ComboBoxItem Content="5000zł" />
+                <ComboBoxItem Content="10000zł" />
+            </ComboBox>
+
+            <Button x:Name="btnWezKredyt" Margin="0 10 0 0" Style="{StaticResource ButtontheBankStyle}" Content="Weź kredyt" Grid.Row="4" />
+
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Background="Moccasin" Grid.ColumnSpan="4" Grid.Column="0" Height="50"/>
+
+                <TextBlock Text="Oprocentowanie"  Grid.Column="0" Style="{StaticResource TextBlocktheBankStyle}" FontSize="17" VerticalAlignment="Center"/>
+                <TextBlock Text="Kwota"  Grid.Column="1" Style="{StaticResource TextBlocktheBankStyle}" FontSize="20" VerticalAlignment="Center"/>
+                <TextBlock Text="Data rozpoczęcia"  Grid.Column="2" Style="{StaticResource TextBlocktheBankStyle}" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock Text="Data zakończenia"  Grid.Column="3" Style="{StaticResource TextBlocktheBankStyle}" FontSize="16" VerticalAlignment="Center"/>
+
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Credits}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <local:SingleOperationUserControl DataContext="{Binding .}" Height="60" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>
