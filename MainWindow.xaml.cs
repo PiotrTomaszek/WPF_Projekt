@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -119,7 +120,7 @@ namespace P4_Projekt_2
             var newCredit = new SingleCredit
             {
                 WhatPercent = percent,
-                Cash = price.ToString(),
+                Cash = price.ToString(CultureInfo.CreateSpecificCulture("en-US")),
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now.AddMonths(int.Parse(date.Split(' ').FirstOrDefault()))
             };
@@ -149,7 +150,7 @@ namespace P4_Projekt_2
             var price = ((TextBox)uControlLokaty.FindName("KwotaLokaty")).Text;
 
             // Sprawdzanie czy klient posiada odpowiednia sumę pieniędzy by traksakcja się wykonała.
-            if (double.TryParse(price, out double result))
+            if (double.TryParse(price, NumberStyles.Any, new CultureInfo("pl-PL"), out double result))
             {
                 if (_theBankVievModel.ClientMoney < result)
                 {
@@ -164,7 +165,7 @@ namespace P4_Projekt_2
             var newDeposit = new SingleDeposit
             {
                 WhatPercent = double.Parse(percent.Substring(0, percent.Length - 1)),
-                Cash = price,
+                Cash = price.ToString(CultureInfo.CreateSpecificCulture("de-DE")),
                 StartTime = DateTime.Now,
                 EndTime = DateTime.Now.AddMonths(int.Parse(date.Split(' ').FirstOrDefault()))
             };

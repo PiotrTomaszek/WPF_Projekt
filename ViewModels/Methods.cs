@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace P4_Projekt_2
 {
@@ -65,7 +66,7 @@ namespace P4_Projekt_2
             var money = 0.0;
             foreach (var item in single)
             {
-                double.TryParse(item.Cash, out double result);
+                double.TryParse(item.Cash, NumberStyles.Any, new CultureInfo("pl-PL"), out double result);
                 money += result;
             }
             return money;

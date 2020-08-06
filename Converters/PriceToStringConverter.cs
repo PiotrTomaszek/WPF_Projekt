@@ -18,17 +18,15 @@ namespace P4_Projekt_2.Converters
             if (!(value is string || value is double))
                 return null;
 
-            if (!(double.TryParse(value.ToString(), out double temp)))
-                return null;
+            string[] arr = value.ToString().Split(new[] { '.', ',' });
+            string temp = string.Empty;
 
-            var tempStr = string.Empty;
+            if (arr.Length == 1)
+                temp = "00";
+            else
+                temp = arr[1];
 
-            tempStr = Math.Round(double.Parse(temp.ToString()), 2).ToString();
-
-            if (temp % 1 == 0)
-                tempStr = $"{temp},00";
-
-            return $"{tempStr.ToString(CultureInfo.CurrentCulture)}zł";
+            return $"{arr[0]}{CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator}{double.Parse(temp) % 100}";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
